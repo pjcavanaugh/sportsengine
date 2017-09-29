@@ -1,0 +1,46 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid" id="app">
+      <div class="row">
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="pool-count">Pools</label>
+            <input id="pool-count" v-model.number="numPools" type="number" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="team-count">Teams</label>
+            <input id="team-count" v-model.number="numTeams" type="number" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="round-count">Rounds</label>
+            <input id="round-count" v-model.number="numRounds" type="number" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label class="radio-inline" for="snake"><input type="radio" id="snake" value="true" v-model="snake">Snake</label>
+            <label class="radio-inline" for="sequential"><input type="radio" id="sequential" value="false" v-model="snake">Sequential</label>
+          </div>
+          <button v-on:click="createPools" class="btn btn-default">Create</button>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="card" v-for="pool in pools">
+          <div class="card-header">
+            {{ pool.name }}
+          </div>
+          <div class="card-block">
+            <ul v-for="round in pool.rounds">
+              <li v-for="game in round.games">{{ game.team1.name }} vs {{ game.team2.name }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>
